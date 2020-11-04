@@ -700,32 +700,43 @@ view: dv_flt_com {
        sql: ${TABLE}.dep0 ;;
   }
 
-  dimension: Inc_Tot {
-    type: string
-    case: {
-     when: {
-      sql: ${TABLE}.flight_considered_otp = 1 and sql: ${TABLE}.dep0 ;;
-      label: "1"  }
+  measure: Cant_Vuelos {
+    type: sum
+    sql: ${TABLE}.leg_operated ;;
+  }
+
+  dimension: Hora_Desp_Reprogramada {
+    type: number
+    sql: extract( hour from ${TABLE}.hour_reprogrammed_arrival_tm) ;;
+
     }
+
+  measure: Sum_delay_min{
+    type: sum
+    sql: cast( ${TABLE}.minutes_dep as int64) ;;
+  }
+
+  dimension: Inc_Tot {
+    type:  number
+    sql:case when ${TABLE}.flight_considered_otp= 1 and ${TABLE}.dep_0 =0 then 1 else 0 end  ;;
+
+
     }
 
    dimension: Reg_Tot {
-   type: string
-    case: {
-     when: {
-      sql: ${TABLE}.flight_considered_otp = 1  and   sql: ${TABLE}.swt = 1   ;;
-    label: "1"  }
-    }
+   sql: case when  ${TABLE}.flight_considered_otp = 1  and   sql: ${TABLE}.swt = 1  then 1 else 0 end  ;;
+
+
   }
 
     measure: Sum_Inc_Tot {
     type: sum
-    sql: ${TABLE}.Inc_tot ;;
+    sql: case when ${TABLE}.flight_considered_otp= 1 and ${TABLE}.dep_0 =0 then 1 else 0 end ;;
   }
 
   measure: Sum_Reg_Tot {
     type: sum
-    sql: ${TABLE}.Reg_Tot ;;
+    sql: case when  ${TABLE}.flight_considered_otp = 1  and   sql: ${TABLE}.swt = 1  then 1 else 0 end  ;;
   }
 
 }
