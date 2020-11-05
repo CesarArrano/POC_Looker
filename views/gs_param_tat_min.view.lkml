@@ -1,0 +1,95 @@
+view: gs_param_tat_min {
+  sql_table_name: `DATAMART_MOSS.gs_param_tat_min`
+    ;;
+
+  dimension: company {
+    type: string
+    sql: ${TABLE}.company ;;
+  }
+
+  dimension: destination {
+    type: string
+    sql: ${TABLE}.destination ;;
+  }
+
+  dimension_group: dom_dom {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.DOM_DOM ;;
+  }
+
+  dimension_group: dom_int {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.DOM_INT ;;
+  }
+
+  dimension_group: int_dom {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.INT_DOM ;;
+  }
+
+  dimension_group: int_int {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.INT_INT ;;
+  }
+
+  dimension: material {
+    type: string
+    sql: ${TABLE}.material ;;
+  }
+
+  dimension: name {
+    type: string
+    sql: ${TABLE}.name ;;
+  }
+
+  dimension: origin {
+    type: string
+    sql: ${TABLE}.origin ;;
+  }
+
+  dimension: prev_origin {
+    type: string
+    sql: ${TABLE}.prevOrigin ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [name]
+  }
+}
