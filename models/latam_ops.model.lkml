@@ -649,6 +649,3 @@ explore: vw_lt_semana_otp {}
 explore: vw_lt_zoom {}
 
 explore: vw_periodos {}
-
-
-#comentario
