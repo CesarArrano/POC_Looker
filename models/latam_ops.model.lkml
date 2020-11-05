@@ -649,3 +649,5 @@ explore: vw_lt_semana_otp {}
 explore: vw_lt_zoom {}
 
 explore: vw_periodos {}
+
+explore: pruebas_integrales_looker {}
